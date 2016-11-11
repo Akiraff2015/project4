@@ -16,13 +16,11 @@
 		}
 
 		$scope.addItem = function(item) {
-			console.log(item);
 			$http({
 				method: 'POST',
 				url: '/api/item',
 				data: item
 			}).then(function successCallback(res) {
-				console.log("Item created!");
 				$scope.item = {};
 				getItems();
 			}, function errorCallback(res) {
@@ -41,11 +39,9 @@
 
 			}).then(function successCallback(res) {
 				$scope.item = {};
-				console.log("Error updating item!");
 				getItems();
 
 			}, function errorCallback(res) {
-				console.log(res);
 				getItems();
 			});
 		}

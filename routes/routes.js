@@ -99,24 +99,6 @@ module.exports = function(app, passport) {
 		res.render('../angular/views/item/show', {});
 	});
 
-	app.get('/dashboard/item/new', function(req, res) {
-		res.render('../angular/views/item/new', {});
-	});
-
-	app.post('/item/new', function(req, res) {
-		var item = new Item();
-		item.title = req.body.title;
-		item.quantity = req.body.quantity;
-		item.description = req.body.description;
-
-		item.save(function(err, item) {
-			if (err) {
-				res.json({error: err});
-			}
-			res.redirect('/items');
-		});
-	});
-
 	// GET register
 	app.get('/register', function(req, res) {
 		res.render('../angular/views/register', {});
