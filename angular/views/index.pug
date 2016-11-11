@@ -1,0 +1,17 @@
+extends layout/base
+
+block content
+	div.row
+		form(action="/login", method="post").col.s4.offset-s4.form-style.z-depth-3
+			h2.center-align.font-slabo.font-size-24px="Please login to Inventory Managment!"
+			div.row
+				input.validate(type="text", placeholder="Username")
+				label="Username"
+			div.row
+				input.validate(type="password", placeholder="Password")
+				label="Password"
+			div.row
+				input(type="submit" value="Login").waves-effect-waves-right.btn.col.s4.offset-s1.green.z-depth-2
+				a(href="/register").waves-effect-waves-light.btn.col.s4.offset-s2.red.z-depth-2
+					i.fa.fa-sign-in.margin-right-9px
+					|Register

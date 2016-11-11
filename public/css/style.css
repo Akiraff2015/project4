@@ -1,0 +1,21 @@
+.form-style {
+	margin-top:30px;
+}
+
+/*Helpers*/
+	.margin-top-30px {
+		margin-top:30px;
+	}
+
+	.margin-right-12px {
+		margin-right:12px;
+	}
+
+	.font-slabo {
+		font-family: 'Slabo 27px', serif;
+	}
+
+	.font-size-24px {
+		font-size: 35px;
+	}
+/*End of helpers*/

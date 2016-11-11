@@ -1,0 +1,51 @@
+extends ../layout/base
+
+block content
+	div.container(ng-controller="InventoryController")
+		a(ng-hide="!hideForm", ng-click="hideForm = !hideForm").waves-effect.waves-light.btn.margin-top-30px
+			|Add New Inventory
+		a(ng-hide="hideForm", ng-click="hideForm = !hideForm").red.waves-effect.waves-red.btn.margin-top-30px
+			|Hide the Form
+
+		div(ng-hide="hideForm").row
+			div.col.s4.input-field.inline
+				input(ng-model="item.title", placeholder="Inventory Name", type="text")
+			div.col.s1.input-field.inline
+				input(ng-model="item.quantity", placeholder="0", type="number")
+			div.col.s5.input-field.inline
+				input(ng-model="item.description" placeholder="Description", type="text")
+			div.col.s1.input-field.inline
+				a(ng-click="addItem(item)", onclick="Materialize.toast('Created new item!', 1500)").waves-effect-waves-light.btn.red.z-depth-2
+					|Create
+
+		table.responsive-table.margin-top-30px
+			thead
+				tr
+					th="Inventory Name"
+					th="Quantity"
+					th="Description"
+					th=""
+			tbody
+
+				tr(ng-repeat="item in items" ,data="{{item._id}}")
+					td(ng-if="!editing")="{{item.title}}"
+					td(ng-if="!editing")="{{item.quantity}}"
+					td(ng-if="!editing")="{{item.description}}"
+
+					td(ng-if="editing")
+						input(ng-model="itemToUpdate.title", type="text", placeholder="{{item.title}}")
+					td(ng-if="editing")
+						input(ng-model="itemToUpdate.quantity", type="number", placeholder="{{item.quantity}}")
+					td(ng-if="editing")
+						input(ng-model="itemToUpdate.description", type="text", placeholder="{{item.description}}")
+					td(ng-hide="!editing")
+						a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
+							i.fa.fa-remove
+						a(ng-click="editing=!editing;updateItem(itemToUpdate, $index)").btn-floating.waves-circle.waves-effect.waves-green.green.z-depth-3
+							i.fa.fa-check
+						
+					td(ng-hide="editing")
+						a(ng-click="deleteItem(item)").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
+							i.fa.fa-trash-o
+						a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-orange.orange.z-depth-3
+							i.fa.fa-pencil

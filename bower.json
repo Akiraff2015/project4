@@ -1,0 +1,24 @@
+{
+  "name": "project4",
+  "description": "Inventory Managment System Application",
+  "main": "app.js",
+  "authors": [
+    "Akira F. Fukushima"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Akiraff2015/website",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "materialize": "^0.97.8",
+    "angular": "^1.5.8",
+    "chart.js": "^2.3.0",
+    "font-awesome": "^4.7.0",
+    "angular-resource": "^1.5.8"
+  }
+}

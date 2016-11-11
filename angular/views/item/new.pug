@@ -1,0 +1,17 @@
+extends ../layout/base
+
+block content
+	div.row
+		form(action="/item/new", method="post").col.s4.offset-s4.form-style.z-depth-3
+			h2.font-slabo.font-size-24px="Create New Item!"
+			div.row
+				input(type="text", name="title" placeholder="Name")
+				label="Name"
+			div.row
+				input(type="number", name="quantity" placeholder="Quantity")
+				label="Quantity"
+			div.row
+				input(type="text", name="description" placeholder="Description")
+				label="Description"
+			div.row
+				input(type="submit", value="Create New Item").waves-effect-waves-light.btn.red.z-depth-2

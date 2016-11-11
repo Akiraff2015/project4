@@ -1,0 +1,26 @@
+doctype html
+html(ng-app="InventoryApp")
+	head
+		meta(charset="UTF-8")
+		block title
+			title="Project 4"
+		script(src="../../../bower_components/angular/angular.min.js")
+		script(src="../../../bower_components/angular-resource/angular-resource.js")
+		script(src="../../../bower_components/jquery/dist/jquery.js")
+		script(src="../../../bower_components/materialize/bin/materialize.js")
+		script(src="../../../angular/angularApp.js")
+
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/materialize/dist/css/materialize.css")
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/font-awesome/css/font-awesome.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Slabo+27px', rel='stylesheet')
+		link(rel="stylesheet", type="text/css", href="../../../public/css/style.css")
+
+	body
+		header
+			nav
+				div.nav-wrapper.light-blue.darken-4
+					a.brand-logo(href="#")
+						|Inventory Managment
+					ul#nav-mobile.right.hide-on-med-and-down
+
+		block content

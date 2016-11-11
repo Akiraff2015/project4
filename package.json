@@ -1,0 +1,27 @@
+{
+  "name": "project4",
+  "version": "1.0.0",
+  "description": "Inventory Managment System Application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Akira F. Fukushima",
+  "license": "MIT",
+  "dependencies": {
+    "angular-resource": "^1.5.8",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.15.2",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.14.0",
+    "express-session": "^1.13.0",
+    "moment": "^2.15.1",
+    "mongoose": "^4.6.6",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "pug": "^2.0.0-beta6",
+    "socket.io": "^1.4.8",
+    "validator": "^5.4.0"
+  }
+}
