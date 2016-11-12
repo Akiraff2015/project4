@@ -99,6 +99,11 @@ module.exports = function(app, passport) {
 		res.render('../angular/views/item/show', {});
 	});
 
+	// Render /dashboard page
+	app.get('/dashboard', function(req, res) {
+		res.render('../angular/views/graph/show', {});
+	});
+
 	// GET register
 	app.get('/register', function(req, res) {
 		res.render('../angular/views/register', {});
