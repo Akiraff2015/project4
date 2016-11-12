@@ -1,7 +1,20 @@
 (function() {
 	var app = angular.module("InventoryApp", ['ngResource']);
 
-	app.controller("InventoryController", ['$scope', '$http', function($scope, $http) {
+
+	app.factory('InventoryFactory', ['$http', function($http) {
+		var itemsData = function() {
+			return $http.get('/api/items').then(function(res) {
+				return res.data;
+			});
+		};
+
+		return {
+			data: itemsData
+		};
+	}]);
+
+	app.controller("InventoryController", ['$scope', '$http', 'InventoryFactory', function($scope, $http, InventoryFactory) {
 		$scope.items = [];
 		$scope.item = {};
 		$scope.itemToUpdate = {};
@@ -9,9 +22,9 @@
 		$scope.hideForm = true;
 		$scope.editing = false;
 
-		var getItems = function () {
-			$http.get('/api/items').success(function(data) {
-				$scope.items = data;
+		var getItems = function(){
+			InventoryFactory.data().then(function(res) {
+				$scope.items = res;
 			});
 		}
 
