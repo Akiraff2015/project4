@@ -42,6 +42,10 @@ require('./angular/controllers/passport')(passport);
 //Routes directory
 require('./routes/routes')(app, passport);
 
+// API
+require('./routes/api/item')(app);
+require('./routes/api/board')(app);
+
 app.listen(3000, function () {
 	console.log('http://localhost:3000/');
 });

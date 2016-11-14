@@ -11,11 +11,32 @@
 		margin-right:12px;
 	}
 
+	.margin-lr-6px {
+		margin: 0 6px;
+	}
+
 	.font-slabo {
 		font-family: 'Slabo 27px', serif;
 	}
 
 	.font-size-24px {
 		font-size: 35px;
+	}
+
+	.noselect {
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.default-cursor {
+		cursor: default;
+	}
+
+	.pointer-cursor {
+		cursor: pointer;
 	}
 /*End of helpers*/

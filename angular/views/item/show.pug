@@ -29,7 +29,10 @@ block content
 
 				tr(ng-repeat="item in items" ,data="{{item._id}}")
 					td(ng-if="!editing")="{{item.title}}"
-					td(ng-if="!editing")="{{item.quantity}}"
+					td(ng-if="!editing")
+						i.pointer-cursor.fa.fa-minus-circle.margin-lr-6px(ng-click="decrementQuantity(item, $index)")
+						span.noselect.default-cursor="{{item.quantity}}"
+						i.pointer-cursor.fa.fa-plus-circle.margin-lr-6px(ng-click="incrementQuantity(item, $index)")
 					td(ng-if="!editing")="{{item.description}}"
 
 					td(ng-if="editing")

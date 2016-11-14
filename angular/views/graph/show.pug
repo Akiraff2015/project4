@@ -1,5 +1,12 @@
 extends ../layout/base
 
 block content
-	div.container.margin-top-30px(ng-controller="GraphController")
-		canvas#myChart(width="600", height="400")
+	div.margin-top-30px(ng-controller="GraphController")
+		div.row
+			div.col.s6
+				ul.collapsible(data-collapsible="accordio")
+					li
+						div.collapsible-header
+							p="Number of Items in Stock"
+						div.collapsible-body
+							canvas#stockItems(width="400", height="400")

@@ -5,7 +5,7 @@
 		angular.element(document).ready(function() {
 			var quantityArray = [];
 			var itemArray = [];
-			var ctx = document.getElementById("myChart").getContext("2d");
+			var ctx = document.getElementById("stockItems").getContext("2d");
 
 			InventoryFactory.data().then(function(res) {
 				res.forEach(function(element, index, array) {
@@ -31,7 +31,7 @@
 						}]
 					},
 					options: {
-						responsive: false,
+						responsive: true,
 						scales: {
 							yAxes: [{
 								ticks: {
