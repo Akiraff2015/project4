@@ -1,0 +1,17 @@
+extends ../layout/base
+
+block content
+	div.container(ng-controller="SupplierController")
+		div.row
+			div.input-field.col.s6
+				input(ng-model="supplier.companyName", placeholder="Company's Name")
+			div.input-field.col.s6
+				input(ng-model="supplier.contactName", placeholder="Contact's Name")
+			div.input-field.col.s6
+				input(type="email" ng-model="supplier.email", placeholder="E-mail")
+			div.input-field.col.s6
+				input(ng-model="supplier.phone", placeholder="Phone Number")
+
+		div.col.s1.input-field.inline
+			a(ng-click="addNewSupplier(supplier)", onclick="Materialize.toast('Created new item!', 1500)").waves-effect-waves-light.btn.red.z-depth-2
+				|Create

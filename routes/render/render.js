@@ -4,6 +4,11 @@ module.exports = function(app) {
 		res.render('../angular/views/item/show', {});
 	});
 
+	// Render /board page
+	app.get('/board', function(req, res) {
+		res.render('../angular/views/board/show', {});
+	});
+
 	// Render /graph page
 	app.get('/graph', function(req, res) {
 		res.render('../angular/views/graph/show', {});
@@ -32,5 +37,10 @@ module.exports = function(app) {
 	//render /history page
 	app.get('/history', function(req, res) {
 		res.render('../angular/views/history/show', {});
+	});
+
+	//rennder /supplier page
+	app.get('/supplier', function(req, res) {
+		res.render('../angular/views/supplier/show', {});
 	});
 };
