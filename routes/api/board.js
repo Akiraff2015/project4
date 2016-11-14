@@ -7,6 +7,7 @@ module.exports = function(app) {
 			if (err) {
 				res.status(404).send(err);
 			}
+
 			else {
 				res.status(200).send(boards);
 			}
@@ -73,7 +74,6 @@ module.exports = function(app) {
 	//Method: Delete --> Board:id
 	app.delete('/api/board/:id', function(req, res) {
 		var id = req.params.id;
-
 		Board.findOneAndRemove({_id: id}, function(req, board) {
 			if (err) {
 				res.status(500).send(err);
