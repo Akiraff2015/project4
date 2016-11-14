@@ -10,7 +10,7 @@
 		$scope.editing = false;
 
 		var getItems = function(){
-			InventoryFactory.data().then(function(res) {
+			InventoryFactory.itemsData().then(function(res) {
 				$scope.items = res;
 			});
 		}

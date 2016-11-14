@@ -3,6 +3,7 @@
 
 	app.controller('BoardMessageController', ['$scope', '$http', function($scope, $http) {
 		$scope.board = {};
+		$scope.test = "red";
 
 		$scope.addNewBoardMessage = function(newBoard) {
 			$http({
