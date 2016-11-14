@@ -55,7 +55,7 @@ module.exports = function(app) {
 	});
 
 	app.delete('/api/ingredient/:id', function(req, res) {
-		var id: req.params.id;
+		var id = req.params.id;
 		Ingredient.findOneAndRemove({_id: id}, function(req, ingredient) {
 			if (err) {
 				res.status(500).send(err);
