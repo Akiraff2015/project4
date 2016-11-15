@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-var Ingredient = require('./ingredient');
+
+// TODO: reference back to ingredient
+// var Ingredient = require('./ingredient');
 
 var recipeSchema = mongoose.Schema({
 	name: {
@@ -18,8 +20,7 @@ var recipeSchema = mongoose.Schema({
 	},
 
 	ingredients: [{
-		type: mongoose.Schema.Types.ObjectId, 
-		ref:'Ingredient'
+		type: [String]
 	}],
 
 	dateCreated: {

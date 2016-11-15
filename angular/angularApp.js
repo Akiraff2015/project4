@@ -1,4 +1,4 @@
 (function() {
-	const app = angular.module("InventoryApp", ['ngResource']);
+	const app = angular.module("InventoryApp", ['ngResource', 'ngTagsInput']);
 
 })();
