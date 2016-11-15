@@ -15,6 +15,10 @@
 			});
 		}
 
+		$scope.initModals = function() {
+			$('.modal').modal();
+		};
+
 		$scope.decrementQuantity = function(item, index) {
 			var itemId = $scope.items[index]._id;
 

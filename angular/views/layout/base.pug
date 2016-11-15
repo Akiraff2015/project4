@@ -35,11 +35,21 @@ html(ng-app="InventoryApp")
 		header
 
 			nav.green
+				ul#dropdown1.dropdown-content
+					li
+						a(href="/recipe") Create New Recipe
+					li
+						a(href="/items") Create New Inventory
+					li
+						a(href="/board") Create New Announcement
 				div.nav-rapper
 					ul.hide-on-med-and-down.right
 						li
 							a(href='/dashboard') Dashboard
 						li
 							a(href='/graph') Analytics
+						li.dropdown-button(data-activates="dropdown1")
+							a
+								|Managment Tool
 
 		block content

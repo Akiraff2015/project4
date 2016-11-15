@@ -51,6 +51,7 @@ require('./routes/api/item')(app);
 require('./routes/api/itemHistory')(app);
 require('./routes/api/supplier')(app);
 require('./routes/api/recipe')(app);
+require('./routes/api/comment')(app);
 
 
 app.listen(3000, function () {

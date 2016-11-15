@@ -39,7 +39,6 @@ module.exports = function(app) {
 	// METHOD: PUT --> Board:id
 	app.put('/api/board/:id', function(req, res) {
 		var id = req.params.id;
-		var updateBoardMessage;
 
 		var updateBoardMessageObj = {
 			title: req.body.title,

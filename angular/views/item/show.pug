@@ -27,28 +27,34 @@ block content
 					th=""
 			tbody
 
-				tr(ng-repeat="item in items" ,data="{{item._id}}")
-					td(ng-if="!editing")="{{item.title}}"
-					td(ng-if="!editing")
-						i.pointer-cursor.fa.fa-minus-circle.margin-lr-6px(ng-click="decrementQuantity(item, $index)")
-						span.noselect.default-cursor="{{item.quantity}}"
-						i.pointer-cursor.fa.fa-plus-circle.margin-lr-6px(ng-click="incrementQuantity(item, $index)")
-					td(ng-if="!editing")="{{item.description}}"
+			tr(ng-repeat="item in items", data="{{item._id}}", repeat-done="initModals()")
+				td(ng-if="!editing")="{{item.title}}"
+				td(ng-if="!editing")
+					i.pointer-cursor.fa.fa-minus-circle.margin-lr-6px(ng-click="decrementQuantity(item, $index)")
+					span.noselect.default-cursor="{{item.quantity}}"
+					i.pointer-cursor.fa.fa-plus-circle.margin-lr-6px(ng-click="incrementQuantity(item, $index)")
+				td(ng-if="!editing")="{{item.description}}"
 
-					td(ng-if="editing")
-						input(ng-model="itemToUpdate.title", type="text", placeholder="{{item.title}}")
-					td(ng-if="editing")
-						input(ng-model="itemToUpdate.quantity", type="number", placeholder="{{item.quantity}}")
-					td(ng-if="editing")
-						input(ng-model="itemToUpdate.description", type="text", placeholder="{{item.description}}")
-					td(ng-hide="!editing")
-						a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
-							i.fa.fa-remove
-						a(ng-click="editing=!editing;updateItem(itemToUpdate, $index)").btn-floating.waves-circle.waves-effect.waves-green.green.z-depth-3
-							i.fa.fa-check
-						
-					td(ng-hide="editing")
-						a(ng-click="deleteItem(item)").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
-							i.fa.fa-trash-o
-						a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-orange.orange.z-depth-3
-							i.fa.fa-pencil
+				td(ng-if="editing")
+					input(ng-model="itemToUpdate.title", type="text", placeholder="{{item.title}}")
+				td(ng-if="editing")
+					input(ng-model="itemToUpdate.quantity", type="number", placeholder="{{item.quantity}}")
+				td(ng-if="editing")
+					input(ng-model="itemToUpdate.description", type="text", placeholder="{{item.description}}")
+				td(ng-hide="!editing")
+					a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
+						i.fa.fa-remove
+					a(ng-click="editing=!editing;updateItem(itemToUpdate, $index)").btn-floating.waves-circle.waves-effect.waves-green.green.z-depth-3
+						i.fa.fa-check
+				td(ng-hide="editing")
+					a(ng-click="deleteItem(item)").btn-floating.waves-circle.waves-effect.waves-red.red.z-depth-3.margin-right-12px
+						i.fa.fa-trash-o
+					a(ng-click="editing=!editing").btn-floating.waves-circle.waves-effect.waves-orange.orange.z-depth-3.margin-right-12px
+						i.fa.fa-pencil
+					button(data-target="{{$index}}").btn-floating.waves-circle.waves-effect.waves-purple.purple.z-depth-3
+						i.fa.fa-line-chart
+
+				div(id="{{$index}}").modal
+					div.modal-content
+						h4="{{item._id}}"
+						p="{{item.description}}"

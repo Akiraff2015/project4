@@ -20,6 +20,7 @@
     "chart.js": "^2.3.0",
     "font-awesome": "^4.7.0",
     "angular-resource": "^1.5.8",
-    "ng-tags-input": "^3.1.1"
+    "ng-tags-input": "^3.1.1",
+    "jquery": "2.1.1"
   }
 }
