@@ -17,10 +17,17 @@
 
 		$scope.decrementQuantity = function(item, index) {
 			var itemId = $scope.items[index]._id;
+
 			var updateQuantity = {
 				title: $scope.items[index].title,
 				quantity: $scope.items[index].quantity - 1,
 				description: $scope.items[index].description
+			};
+
+			var createItemHistory = {
+				title: itemId,
+				quantity: $scope.items[index].quantity -1,
+				dateCreated: new Date()
 			};
 
 			$http({
@@ -31,6 +38,16 @@
 				getItems();
 			}, function errorCallback(res) {
 				getItems();
+			});
+
+			$http({
+				method: 'POST',
+				url: '/api/history',
+				data: createItemHistory
+			}).then(function successCallback(res) {
+				console.log("Success!")
+			}, function errorCallback(res) {
+				console.log(res);
 			});
 		};
 

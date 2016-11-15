@@ -8,7 +8,8 @@ var itemHistorySchema = mongoose.Schema({
 	},
 
 	quantity: {
-		type: Number,
+		type: [Number],
+		min: 0,
 		required: true
 	},
 
