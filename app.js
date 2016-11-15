@@ -50,6 +50,7 @@ require('./routes/api/ingredient')(app);
 require('./routes/api/item')(app);
 require('./routes/api/itemHistory')(app);
 require('./routes/api/supplier')(app);
+require('./routes/api/recipe')(app);
 
 
 app.listen(3000, function () {

@@ -13,20 +13,16 @@ block content
 			div.input-field.col.s12
 				input#recipe_category(type="text", ng-model="recipe.category")
 				label(for="recipe_category") Category
-			div.input-field.col.s12
-				input#recipe_ingredient(type="text", ng-model="recipe.ingredient")
-				label(for="recipe_ingredient") Ingredient
-			//- div.input-field.col.s12
-			//- 	tags-input.input-field(ng-model='ingredientTags')
-
-			div(ng-repeat="x in ingredientsForm").input-field.col.s10
+			div.input.col.s12
+				textarea.materialize-textarea(placeholder="Write instructions here", ng-model="recipe.instruction")
+			div(ng-repeat="x in ingredientsForm").input-field
 				div.col.s10
-					input#recipe_ingredient(type="text", ng-model="recipe.ingredient", placeholder="Ingredient")
-				div.col.s1.right
+					input#recipe_ingredient(type="text", ng-model="ingredientsForm[$index].name", placeholder="Ingredient")
+				div.col.s1
 					a(ng-click="removeInputField($index)").btn-floating.red
 						i.fa.fa-minus
-			div.input-field.col.s1
-				a(ng-click="createNewInputField()").btn-floating.orange
-					i.fa.fa-plus
+				div(ng-show="$last").col.s1
+					a(ng-click="createNewInputField()").btn-floating.orange
+						i.fa.fa-plus
 
-			a(ng-click="createRecipe(recipe)").btn.waves-effect.waves-light.red Create New Recipe
+			a(ng-click="createRecipe(recipe); showForm = !showForm").btn.waves-effect.waves-light.red Create New Recipe

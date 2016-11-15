@@ -14,7 +14,7 @@ var recipeSchema = mongoose.Schema({
 		required: true
 	},
 
-	instructions: {
+	instruction: {
 		type: String,
 		required: true
 	},
@@ -33,3 +33,5 @@ var recipeSchema = mongoose.Schema({
 		default: Date.now
 	}
 });
+
+module.exports = mongoose.model('Recipe', recipeSchema);
