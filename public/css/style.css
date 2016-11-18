@@ -2,6 +2,14 @@
 	margin-top:30px;
 }
 
+.chage-color-fa-times:hover {
+	color: red;
+}
+
+.collapsible li.disabled .collapsible-body {
+	display: none !important;
+}
+
 /*Helpers*/
 	.margin-top-30px {
 		margin-top:30px;

@@ -3,8 +3,11 @@ extends ../layout/base
 block content
 	div.container(ng-controller="BoardMessageController")
 		div.row
+			h1 Create New Board
+		div.row
 			div.input-field.col.s8
-				input(ng-model="board.title", placeholder="Title")
+				input#board_title.validate(type="text", ng-model="board.title")
+				label(for="board_title") Title
 
 			div.input-field.col.s4
 				select.browser-default(ng-model="board.importance")
@@ -16,5 +19,5 @@ block content
 				textarea.materialize-textarea(ng-model="board.description")
 
 		div.col.s1.input-field.inline
-			a(ng-click="addNewBoardMessage(board)", onclick="Materialize.toast('Created new item!', 1500)").waves-effect-waves-light.btn.red.z-depth-2
+			a(ng-click="addNewBoardMessage(board)", onclick="Materialize.toast('Created!', 1500)").waves-effect-waves-light.btn.red.z-depth-2
 				|Create

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+var Comment = require('./comment');
 
-var boardSchema = mongoose.Schema({
+var boardSchema = new mongoose.Schema({
 	title: {
 		type: String, 
 		required: true
@@ -22,6 +23,22 @@ var boardSchema = mongoose.Schema({
 		default: false
 	},
 
+	comments: [{
+		type: mongoose.Schema.Types.ObjectId, 
+		ref: 'Comment'
+	}],
+
+	like: {
+		type: Number,
+		default: 0,
+		min: 0
+	},
+
+	likeBoolean: {
+		type: Boolean,
+		default: false
+	},
+
 	dateCreated: {
 		type: Date, 
 		default: Date.now
@@ -32,5 +49,12 @@ var boardSchema = mongoose.Schema({
 		default: Date.now
 	}
 });
+
+var autoPopulateComment = function(next) {
+	this.populate('Comment');
+	next();
+};
+
+boardSchema.pre('findOne', autoPopulateComment).pre('find', autoPopulateComment);
 
 module.exports = mongoose.model('Board', boardSchema);

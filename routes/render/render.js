@@ -9,6 +9,10 @@ module.exports = function(app) {
 		res.render('../angular/views/board/show', {});
 	});
 
+	app.get('/board/:id', function(req, res) {
+		res.render('../angular/views/singleBoard/show', {});
+	});
+
 	// Render /graph page
 	app.get('/graph', function(req, res) {
 		res.render('../angular/views/graph/show', {});

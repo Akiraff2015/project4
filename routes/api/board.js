@@ -40,18 +40,26 @@ module.exports = function(app) {
 	app.put('/api/board/:id', function(req, res) {
 		var id = req.params.id;
 
+		// req.body.comments
+
 		var updateBoardMessageObj = {
+			$push: {"comments": req.body.comments},
 			title: req.body.title,
 			importance: req.body.importance,
 			description: req.body.description,
 			read: req.body.read,
+			like: req.body.like,
+			likeBoolean: req.body.LikeBoolean,
 			dateCreated: req.body.dateCreated,
-			dateUpdated: new Date()
+			dateUpdated: req.body.dateUpdated
 		};
 
-		Board.findByIdAndUpdate({_id: id}, updateBoardMessageObj, function(err) {
+		Board.findByIdAndUpdate({_id: id}, updateBoardMessageObj, 
+
+
+			function(err) {
 			if (err) {
-				res.status.send(err);
+				res.status(404).send(err);
 			}
 
 			else {

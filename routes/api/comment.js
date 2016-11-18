@@ -13,6 +13,18 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/newest-comment', function(req, res) {
+		Comment.findOne().sort({ field: 'asc', _id: -1 }).limit(1).exec(function(err, comment) {
+			if (err) {
+				res.status(404).send(err);
+			}
+
+			else {
+				res.status(200).send(comment);
+			}
+		});
+	});
+
 	app.post('/api/comment', function(req, res) {
 		var newComment;
 
@@ -23,11 +35,11 @@ module.exports = function(app) {
 
 		newComment.save(function(err) {
 			if (err) {
-				console.log(err);
+				res.status(500).send(err);
 			}
 
 			else {
-				console.log("Comment have been created");
+				res.status(200).send(newComment);
 			}
 		});
 	});

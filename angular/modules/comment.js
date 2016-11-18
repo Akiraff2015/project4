@@ -8,8 +8,13 @@ var commentSchema = mongoose.Schema({
 
 	like: {
 		type: Number,
-		default: 0
+		default: 0,
 		min: 0
+	},
+
+	likeBoolean: {
+		type: Boolean,
+		default: false
 	},
 
 	dateCreated: {

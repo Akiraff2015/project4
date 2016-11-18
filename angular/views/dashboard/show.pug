@@ -10,9 +10,7 @@ block content
 			|Announcements
 
 		div.row
-			h5
-				|{{board.title}}
-				|Filter by
+			h5 Filter by
 			div.col.s2
 				input#unread(type="checkbox")
 				label(for="unread")
@@ -35,15 +33,33 @@ block content
 				span="Announcement"
 
 		div.row
-			ul.collapsible(data-collapsible="accordion")
-				li(ng-repeat="board in boardMessages")
+			ul.collapsible(data-collapsible="expandable")
+				li.disableCollapsible(ng-repeat="board in boardMessages")
 					div.collapsible-header
 							h5
 								input(ng-checked="{{board.read}}", ng-click="markRead(board)", type="checkbox", id="{{board._id}}").browser-default
 								label(for="{{board._id}}")
 								|{{board.title}}
 
-								span.right.font-size-14px.red-text
-										|{{board.importance}}
+								span.right {{board.like}}
+								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board, $index)").fa.fa-thumbs-up.right
+								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board, $index)").fa.fa-thumbs-down.right
+
 					div.collapsible-body
 						p="{{board.description}}"
+						p.right-align.text-style 
+							a.modal-trigger(href="#commentModal", ng-click="initCommentModal(board)") Reply
+
+					div#commentModal.modal
+						div.modal-content
+							span(ng-click="closeCommentModal()").right
+								i.fa.fa-times.chage-color-fa-times
+							h2 Reply to {{localTitle}}
+
+							div.row
+								div.input-field.col.s12
+									input#comment_message.validate(type="text", ng-model="comment.comment")
+									label(for="comment_message") Comment
+
+						div.modal-footer
+							a(ng-click="replyComment(comment, board)").btn.waves-effect.waves-red.z-depth-3.red.accent-4 Reply
