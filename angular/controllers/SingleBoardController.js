@@ -2,9 +2,11 @@
 	var app = angular.module('InventoryApp');
 
 	app.controller('SingleBoardController', ['$scope', '$http', function($scope, $http) {
+		// Getting id from url
 		var tempArrUrl = window.location.href.split('/');
 		var getId = tempArrUrl[tempArrUrl.length-1];
-
+		
+		$scope.editCommentMode = true;
 		$scope.singleBoard = {};
 
 		$scope.getSingleBoard = function() {
@@ -65,9 +67,44 @@
 			});
 		};
 
-		$scope.editComment = function(comment) {
-			console.log(comment);
-		}
+		$scope.editComment = function(comment, updateComment) {
+			var getCommentId = comment._id;
+
+			var updateCommentObj = {
+				comment: updateComment,
+				like: comment.like,
+				likeBoolean: comment.likeBoolean,
+				dateCreated: comment.dateCreated,
+				dateUpdated: new Date()
+			};
+
+			$http({
+				method: 'PUT',
+				url: '/api/comment/' + getCommentId,
+				data: updateCommentObj
+
+			}).then(function successCallback(res) {
+				$scope.getSingleBoard();
+
+			}, function errorCallback(res) {
+				$scope.getSingleBoard();
+			});
+		};
+
+		$scope.deleteComment = function(comment) {
+			var getCommentId = comment._id;
+
+			$http({
+				method: 'DELETE',
+				url: '/api/comment/' + getCommentId
+
+			}).then(function successCallback(res) {
+				$scope.getSingleBoard();
+
+			}, function errorCallback(res) {
+				$scope.getSingleBoard();
+			});
+		};
 
 		$scope.initCommentModal = function() {
 			$('#commentModal').modal();

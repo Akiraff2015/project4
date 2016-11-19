@@ -19,8 +19,12 @@ block content
 						span.card-title
 							i.fa.fa-clock-o
 							| {{board.dateCreated}}
-							i(ng-click="editComment(board)").fa.fa-pencil.right
-						p {{board.comment}}
+							i.fa.fa-times.right.change-color-fa-times(ng-click="deleteComment(board)")
+							i.fa.fa-pencil.right(ng-click="editCommentMode = !editCommentMode")
+						p(ng-show="editCommentMode") {{board.comment}}
+						div(ng-hide="editCommentMode")
+							input#update_message.validate(type="text", ng-model="updateComment", placeholder="{{board.comment}}")
+							a.btn(ng-click="editComment(board, updateComment); editCommentMode = !editCommentMode") Update
 					div.card-action
 						a.modal-trigger(ng-click="initCommentModal()", href="#commentModal") Reply
 
@@ -28,7 +32,7 @@ block content
 							div.modal-content
 
 								span(ng-click="closeCommentModal()").right
-									i.fa.fa-times.chage-color-fa-times
+									i.fa.fa-times.change-color-fa-times
 								h2 Reply
 
 								div.row
