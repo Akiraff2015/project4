@@ -30,7 +30,10 @@ module.exports = function(app) {
 
 		newComment = new Comment({
 			comment: req.body.comment,
-			dateCreated: new Date()
+			like: req.body.like,
+			likeBoolean: req.body.likeBoolean,
+			dateCreated: req.body.dateCreated,
+			dateUpdated: req.body.dateUpdated
 		});
 
 		newComment.save(function(err) {
@@ -79,7 +82,7 @@ module.exports = function(app) {
 
 	app.delete('/api/comment/:id', function(req, res) {
 		var id = req.params.id;
-		Board.findOneAndRemove({_id: id}, function(req, comment) {
+		Comment.findOneAndRemove({_id: id}, function(err, comment) {
 			if (err) {
 				res.status(500).send(err);
 			}

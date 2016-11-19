@@ -50,11 +50,4 @@ var boardSchema = new mongoose.Schema({
 	}
 });
 
-var autoPopulateComment = function(next) {
-	this.populate('Comment');
-	next();
-};
-
-boardSchema.pre('findOne', autoPopulateComment).pre('find', autoPopulateComment);
-
 module.exports = mongoose.model('Board', boardSchema);

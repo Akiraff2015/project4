@@ -42,13 +42,13 @@ block content
 								|{{board.title}}
 
 								span.right {{board.like}}
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board, $index)").fa.fa-thumbs-up.right
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board, $index)").fa.fa-thumbs-down.right
+								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-up.right
+								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
 
 					div.collapsible-body
 						p="{{board.description}}"
 						p.right-align.text-style 
-							a.modal-trigger(href="#commentModal", ng-click="initCommentModal(board)") Reply
+							a.modal-trigger(href="#commentModal", ng-click="initCommentModal(board); getBoard(board)") Reply
 
 					div#commentModal.modal
 						div.modal-content
@@ -62,4 +62,4 @@ block content
 									label(for="comment_message") Comment
 
 						div.modal-footer
-							a(ng-click="replyComment(comment, board)").btn.waves-effect.waves-red.z-depth-3.red.accent-4 Reply
+							a(ng-click="replyComment(comment)").btn.waves-effect.waves-red.z-depth-3.red.accent-4 Reply

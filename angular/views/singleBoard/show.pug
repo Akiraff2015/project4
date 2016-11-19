@@ -5,4 +5,21 @@ block title
 
 block content
 	div.container(ng-controller="SingleBoardController")
-		p {{test}}
+		h1 {{singleBoard.title}}
+		p {{singleBoard.description}}
+
+		h4
+			i.fa.fa-comment
+			| Comments
+			span(href="#") Reply
+
+		div(ng-repeat="a in singleBoard.comments").row
+			div.col.m8
+				div.card.blue-grey.darken-1.z-depth-3
+					div.card-content.white-text
+						span.card-title
+							| Card Title
+							i.fa.fa-clock-o.right
+						p {{a.comment}}
+					div.card-action
+						a(href="#") Reply
