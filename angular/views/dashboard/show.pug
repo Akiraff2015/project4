@@ -9,28 +9,28 @@ block content
 			i.fa.fa-newspaper-o.margin-right-12px
 			|Announcements
 
-		div.row
-			h5 Filter by
-			div.col.s2
-				input#unread(type="checkbox")
-				label(for="unread")
-				span="Unread"
-			div.col.s2
-				input#read(type="checkbox")
-				label(for="read")
-				span="Read"
-			div.col.s2
-				input#urgent(type="checkbox")
-				label(for="urgent")
-				span="Urgent"
-			div.col.s2
-				input(type="checkbox", id="important").browser-default
-				label(for="important")
-				span="Important"
-			div.col.s3
-				input(type="checkbox", id="announcement")
-				label(for="announcement")
-				span="Announcement"
+		//- div.row
+		//- 	h5 Filter by
+		//- 	div.col.s2
+		//- 		input#unread(type="checkbox")
+		//- 		label(for="unread")
+		//- 		span="Unread"
+		//- 	div.col.s2
+		//- 		input#read(type="checkbox")
+		//- 		label(for="read")
+		//- 		span="Read"
+		//- 	div.col.s2
+		//- 		input#urgent(type="checkbox")
+		//- 		label(for="urgent")
+		//- 		span="Urgent"
+		//- 	div.col.s2
+		//- 		input(type="checkbox", id="important").browser-default
+		//- 		label(for="important")
+		//- 		span="Important"
+		//- 	div.col.s3
+		//- 		input(type="checkbox", id="announcement")
+		//- 		label(for="announcement")
+		//- 		span="Announcement"
 
 		div.row
 			ul.collapsible(data-collapsible="expandable")
@@ -46,12 +46,15 @@ block content
 								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
 
 					div.collapsible-body
-						p="{{board.description}}"
+						p.truncate="{{board.description}}" 
+						p
+							a(href="./board/{{board._id}}") Read More...
 						p.right-align.text-style 
 							a.modal-trigger(href="#commentModal", ng-click="initCommentModal(board); getBoard(board)") Reply
 
 					div#commentModal.modal
 						div.modal-content
+
 							span(ng-click="closeCommentModal()").right
 								i.fa.fa-times.chage-color-fa-times
 							h2 Reply to {{localTitle}}

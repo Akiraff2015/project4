@@ -77,11 +77,13 @@
 					// HTTP PUT success callback
 					}).then(function successCallback(res) {
 						getBoardMessages();
+
 					//HTTP PUT error callback
 					}, function errorCallback(res) {
 						getBoardMessages();
 					});
 				});
+
 			//HTTP POST /api/comment error callback
 			}, function errorCallback(res) {
 				console.log(res);

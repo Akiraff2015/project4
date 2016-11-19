@@ -11,15 +11,30 @@ block content
 		h4
 			i.fa.fa-comment
 			| Comments
-			span(href="#") Reply
 
-		div(ng-repeat="a in singleBoard.comments").row
+		div(ng-repeat="board in singleBoard.comments").row
 			div.col.m8
 				div.card.blue-grey.darken-1.z-depth-3
 					div.card-content.white-text
 						span.card-title
-							| Card Title
-							i.fa.fa-clock-o.right
-						p {{a.comment}}
+							i.fa.fa-clock-o
+							| {{board.dateCreated}}
+							i(ng-click="editComment(board)").fa.fa-pencil.right
+						p {{board.comment}}
 					div.card-action
-						a(href="#") Reply
+						a.modal-trigger(ng-click="initCommentModal()", href="#commentModal") Reply
+
+						div#commentModal.modal
+							div.modal-content
+
+								span(ng-click="closeCommentModal()").right
+									i.fa.fa-times.chage-color-fa-times
+								h2 Reply
+
+								div.row
+									div.input-field.col.s12
+										input#comment_message.validate(type="text", ng-model="comment.comment")
+										label(for="comment_message") Comment
+
+							div.modal-footer
+								a(ng-click="replyComment(comment); closeCommentModal()").btn.waves-effect.waves-red.z-depth-3.red.accent-4 Reply
