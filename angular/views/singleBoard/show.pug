@@ -12,21 +12,23 @@ block content
 			i.fa.fa-comment
 			| Comments
 
-		div(ng-repeat="board in singleBoard.comments").row
+		div(ng-repeat="comment in singleBoard.comments").row
 			div.col.m8
 				div.card.blue-grey.darken-1.z-depth-3
 					div.card-content.white-text
 						span.card-title
 							i.fa.fa-clock-o
-							| {{board.dateCreated}}
-							i.fa.fa-times.right.change-color-fa-times(ng-click="deleteComment(board)")
+							| {{comment.dateCreated}}
+							i.fa.fa-times.right.change-color-fa-times(ng-click="deleteComment(comment)")
 							i.fa.fa-pencil.right(ng-click="editCommentMode = !editCommentMode")
-						p(ng-show="editCommentMode") {{board.comment}}
+						p(ng-show="editCommentMode") {{comment.comment}}
 						div(ng-hide="editCommentMode")
-							input#update_message.validate(type="text", ng-model="updateComment", placeholder="{{board.comment}}")
-							a.btn(ng-click="editComment(board, updateComment); editCommentMode = !editCommentMode") Update
+							input#update_message.validate(type="text", ng-model="updateComment", placeholder="{{comment.comment}}")
+							a.btn(ng-click="editComment(comment, updateComment); editCommentMode = !editCommentMode") Update
 					div.card-action
 						a.modal-trigger(ng-click="initCommentModal()", href="#commentModal") Reply
+						i(ng-click="likeStatus(comment)", ng-hide="{{comment.likeBoolean}}").fa.fa-thumbs-up {{comment.like}}
+						i(ng-click="likeStatus(comment)", ng-show="{{comment.likeBoolean}}").fa.fa-thumbs-down {{comment.like}}
 
 						div#commentModal.modal
 							div.modal-content

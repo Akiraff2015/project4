@@ -52,8 +52,10 @@ module.exports = function(app) {
 
 		var updateCommentObj = {
 			comment: req.body.comment,
+			like: req.body.like,
+			likeBoolean: req.body.likeBoolean,
 			dateCreated: req.body.dateCreated,
-			dateUpdated: new Date()
+			dateUpdated: req.body.dateUpdated
 		};
 
 		Comment.findByIdAndUpdate({_id: id}, updateCommentObj, function(err) {

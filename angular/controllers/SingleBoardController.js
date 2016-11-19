@@ -9,18 +9,53 @@
 		$scope.editCommentMode = true;
 		$scope.singleBoard = {};
 
+		$scope.likeStatus = function(comment) {
+			var getCommentId = comment._id;
+			var updateCommentBoolean = !comment.likeBoolean
+
+			if (!comment.likeBoolean) {
+				var createCommentObj = {
+					comment: comment.comment,
+					like: comment.like + 1,
+					likeBoolean: updateCommentBoolean,
+					dateCreated: comment.dateCreated,
+					dateUpdated: comment.dateUpdated
+				};
+			}
+
+			else {
+				var createCommentObj = {
+					comment: comment.comment,
+					like: comment.like -1,
+					likeBoolean: updateCommentBoolean,
+					dateCreated: comment.dateCreated,
+					dateUpdated: comment.dateUpdated
+				};
+			}
+
+			$http({
+				method: 'PUT',
+				url: '/api/comment/' + getCommentId,
+				data: createCommentObj
+
+			}).then(function successCallback(res) {
+				$scope.getSingleBoard();
+
+			}, function errorCallback(res) {
+				$scope.getSingleBoard();
+			});
+		};
+
 		$scope.getSingleBoard = function() {
 			$http.get('/api/board/' + getId).then(function(res) {
 				$scope.singleBoard = res.data;
 			});
 		};
 
-		$scope.getSingleBoard();
-
 		$scope.replyComment = function(comment) {
 			var createCommentObj = {
 				comment: comment.comment,
-				like: 0,
+				like: comment.like,
 				likeBoolean: false,
 				dateCreated: new Date(),
 				dateUpdated: new Date()
@@ -113,6 +148,8 @@
 		$scope.closeCommentModal = function() {
 			$('#commentModal').modal('close');
 		};
+
+		$scope.getSingleBoard();
 
 	}]);
 })();
