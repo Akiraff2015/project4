@@ -4,7 +4,9 @@
 	app.controller('InventoryController', ['$scope', '$http', 'InventoryFactory', function($scope, $http, InventoryFactory) {
 		$scope.items = [];
 		$scope.item = {};
-		$scope.itemToUpdate = {};
+		$scope.getSingleItem = {};
+		var getIndex = 0;
+		var myChart;
 
 		$scope.hideForm = true;
 		$scope.editing = false;
@@ -15,70 +17,112 @@
 			});
 		}
 
-		$scope.initModals = function() {
+		$scope.initModal = function(item, index) {
+			$scope.getSingleItem = item;
+			getIndex = index;
+			console.log(index);
+
 			$('.modal').modal();
+
+			angular.element(document).ready(function() {
+				var ctx = document.getElementById('lineGraph').getContext('2d');
+
+				InventoryFactory.itemsData().then(function(res) {
+					myChart = new Chart(ctx, {
+						type: 'line',
+						data: {
+							labels: res[index].dateUpdated,
+							datasets: [{
+							label: 'Available Stocks: ' + res[index].quantity[res[index].quantity.length - 1],
+							data: res[index].quantity,
+							backgroundColor: 'rgba(76,175,80, 0.60)'
+						}]
+					},
+						options: {
+							responsive: false,
+							scales: {
+								yAxes: [{
+									ticks: {
+										beginAtZero:true
+									}
+								}]
+							}
+						}
+					});
+				});
+			});
 		};
 
-		$scope.decrementQuantity = function(item, index) {
-			var itemId = $scope.items[index]._id;
+		$scope.closeModal = function() {
+			$('.modal').modal('close');
+		};
 
-			var updateQuantity = {
-				title: $scope.items[index].title,
-				quantity: $scope.items[index].quantity - 1,
-				description: $scope.items[index].description
-			};
+		$scope.decrementQuantity = function(item) {
+			var getItemId = item._id;
 
-			var createItemHistory = {
-				title: itemId,
-				quantity: $scope.items[index].quantity -1,
-				dateCreated: new Date()
+			// Get last index and -1
+			var quantityLength = item.quantity[item.quantity.length - 1];
+			var decQuantity = quantityLength - 1;
+
+			var updateQuantityObj = {
+				title: item.title,
+				quantity: decQuantity,
+				description: item.description,
+				dateCreated: item.dateCreated,
+				dateUpdated: new Date()
 			};
 
 			$http({
 				method: 'PUT',
-				url: '/api/item/' + itemId,
-				data: updateQuantity
+				url: '/api/item/' + getItemId,
+				data: updateQuantityObj
 			}).then(function successCallback(res) {
 				getItems();
 			}, function errorCallback(res) {
 				getItems();
 			});
-
-			$http({
-				method: 'POST',
-				url: '/api/history',
-				data: createItemHistory
-			}).then(function successCallback(res) {
-				console.log("Success!")
-			}, function errorCallback(res) {
-				console.log(res);
-			});
 		};
 
-		$scope.incrementQuantity = function(item, index) {
-			var itemId = $scope.items[index]._id;
-			var updateQuantity = {
-				title: $scope.items[index].title,
-				quantity: $scope.items[index].quantity + 1,
-				description: $scope.items[index].description
+		$scope.incrementQuantity = function(item) {
+			var getItemId = item._id;
+
+			//Get last index and +1
+			var quantityLength = item.quantity[item.quantity.length - 1];
+			var incQuantity = quantityLength + 1;
+
+			var updateQuantityObj = {
+				title: item.title,
+				quantity: incQuantity,
+				description: item.description,
+				dateCreated: item.dateCreated,
+				dateUpdated: new Date()
 			};
 
 			$http({
 				method: 'PUT',
-				url: '/api/item/' + itemId,
-				data: updateQuantity
+				url: '/api/item/' + getItemId,
+				data: updateQuantityObj
 			}).then(function successCallback(res) {
 				getItems();
+
 			}, function errorCallback(res) {
 				getItems();
 			});
 		};
 
 		$scope.addItem = function(item) {
+			var newItemObj = {
+				title: item.title,
+				quantity: item.quantity,
+				description: item.description,
+				dateCreated: new Date(),
+				dateUpdated: new Date()
+			};
+
 			$http({
 				method: 'POST',
 				url: '/api/item',
-				data: item
+				data: newItemObj
 			}).then(function successCallback(res) {
 				$scope.item = {};
 				getItems();
@@ -87,14 +131,21 @@
 			});
 		};
 
-		$scope.updateItem = function(item, index) {
-			var itemId = $scope.items[index]._id;
-			stringifyItem = JSON.stringify(item);
+		$scope.updateItem = function(item) {
+			var getItemId = item._id;
+
+			var updateItemObj = {
+				title: item.title,
+				quantity: item.quantity,
+				description: item.description,
+				dateCreated: item.dateCreated,
+				dateUpdated: new Date()
+			};
 
 			$http({
 				method: 'PUT',
-				url: '/api/item/' + itemId,
-				data: item
+				url: '/api/item/' + getItemId,
+				data: updateItemObj
 
 			}).then(function successCallback(res) {
 				$scope.item = {};

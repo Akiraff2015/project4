@@ -6,12 +6,8 @@ var itemSchema = mongoose.Schema({
 		required: true
 	},
 
-	quantity: {
-		type: Number, 
-		min: 0, 
-		default: 0
-	},
-	
+	quantity: [Number],
+
 	description: {
 		type: String, 
 		default: "No description for this item."
@@ -23,7 +19,7 @@ var itemSchema = mongoose.Schema({
 	},
 
 	dateUpdated: {
-		type: Date,
+		type: [Date],
 		default: Date.now
 	}
 });

@@ -31,11 +31,11 @@ module.exports = function(app) {
 
 		newBoardMessage.save(function(err) {
 			if (err) {
-				console.log(err);
+				res.status(500).send(err);
 			}
 
 			else {
-				console.log("Board message have been created!");
+				res.status(201).send(newBoardMessage);
 			}
 		});
 	});
