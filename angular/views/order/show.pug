@@ -15,16 +15,19 @@ block content
 				th="Total (HK$)"
 				th="Order Created"
 				th="Order Status"
-			tbody
-				td="#oajsh"
-				td="$215.00"
-				td="21/09/2016"
+			tbody(ng-repeat="order in getOrders")
 				td
-					//- a.btn.red.z-depth-3
-					//- 	|not delivered
-					a.btn.green.accent-3.z-depth-3.waves-effect.waves-dark
+					a(ng-click="initModal(order, $index)", href="#detailOrder")
+						|{{order.orderRef}}
+				td="{{order.totalPrice}}"
+				td="{{formatDate[$index]}}"
+				td
+					a(ng-click="updateOrderStatus(order)", ng-hide="{{order.orderConfirmed}}").btn.red.z-depth-3
+						|not delivered
+					a(ng-click="updateOrderStatus(order)", ng-show="{{order.orderConfirmed}}").btn.green.accent-3.z-depth-3.waves-effect.waves-dark
 						|devivered
 
+		//- Modal Form
 		div#createOrder.modal.modal-fixed-footer
 			div.modal-content
 				i(ng-click="closeModal()").fa.fa-times.right
@@ -55,3 +58,21 @@ block content
 							i(ng-click="createNewForm()").fa.fa-plus
 			div.modal-footer
 				a(ng-click="createOrder(order)").btn Submit
+
+		//- Modal Order Information
+		div#detailOrder.modal
+			div.modal-content
+				i(ng-click="closeModal()").fa.fa-times.right
+				h3 {{getSingleOrder.orderRef}}
+
+				table
+					thead
+						th="Name"
+						th="Price (HK$)"
+						th="Quantity"
+						th="Unit"
+					tbody(ng-repeat="item in getSingleOrder.order")
+						td="{{item.name}}"
+						td="{{item.price}}"
+						td="{{item.quantity}}"
+						td="{{item.unit}}"

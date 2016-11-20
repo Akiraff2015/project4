@@ -5,14 +5,21 @@
 		$scope.itemsForm = [{id: 1}];
 		$scope.idCounter = 1;
 		$scope.getOrders = [];
+		$scope.formatDate = [];
+		$scope.getSingleOrder = {};
 
 		var getAllOrders = function() {
 			$http.get('/api/orders').then(function(res) {
 				$scope.getOrders = res.data;
+
+				$scope.getOrders.forEach(function(element, index, arr) {
+					$scope.formatDate.push(moment(element.dateCreated).format('DD MMM YYYY'));
+				});
 			});
 		};
 
-		$scope.initModal = function() {
+		$scope.initModal = function(order) {
+			$scope.getSingleOrder = order;
 			$('.modal').modal();
 		};
 
@@ -56,6 +63,32 @@
 				getAllOrders();
 			});
 		};
+
+		$scope.updateOrderStatus = function(order) {
+			var getOrderId = order._id;
+			var updateOrderStatus = !order.orderConfirmed;
+
+			var updateOrderObj = {
+				orderRef: order.orderRef,
+				order: order.order,
+				totalPrice: order.totalPrice,
+				orderConfirmed: updateOrderStatus,
+				dateCreated: order.dateCreated,
+				dateUpdated: order.dateUpdated
+			};
+
+			$http({
+				method: 'PUT',
+				url: '/api/order/' + getOrderId,
+				data: updateOrderObj
+			}).then(function successCallback(res) {
+				getAllOrders();
+			}, function errorCallback(res) {
+				getAllOrders();
+			});
+		};
+
+		getAllOrders();
 
 	}]);
 })();
