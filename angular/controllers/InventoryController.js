@@ -5,7 +5,7 @@
 		$scope.items = [];
 		$scope.item = {};
 		$scope.getSingleItem = {};
-		var getIndex = 0;
+
 		var myChart;
 
 		$scope.hideForm = true;
@@ -19,8 +19,7 @@
 
 		$scope.initModal = function(item, index) {
 			$scope.getSingleItem = item;
-			getIndex = index;
-			console.log(index);
+			var formatDate = [];
 
 			$('.modal').modal();
 
@@ -28,10 +27,14 @@
 				var ctx = document.getElementById('lineGraph').getContext('2d');
 
 				InventoryFactory.itemsData().then(function(res) {
+					res[index].dateUpdated.forEach(function(element, index, arr) {
+						formatDate.push(moment(element).format('MM/D [at] h:mm A z'));
+					});
+
 					myChart = new Chart(ctx, {
 						type: 'line',
 						data: {
-							labels: res[index].dateUpdated,
+							labels: formatDate,
 							datasets: [{
 							label: 'Available Stocks: ' + res[index].quantity[res[index].quantity.length - 1],
 							data: res[index].quantity,

@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 var orderSchema = mongoose.Schema({
-	subject: {
-		type: String,
-		required: true
-	},
-
 	orderRef: {
-		type: String
+		type: String,
+		unique: true
 	},
 
-	order: {
-		type: String
+	order: [],
+
+	totalPrice: {
+		type: Number,
+		default: 0,
+		min: 0
 	},
 
 	orderConfirmed: {

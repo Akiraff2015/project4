@@ -17,19 +17,21 @@ module.exports = function(app) {
 		var newOrder;
 
 		newOrder = new Order({
-			subject: req.body.subject,
 			orderRef: req.body.orderRef,
 			order: req.body.order,
-			dateCreated: req.body.dateCreated
+			totalPrice: req.body.totalPrice,
+			orderConfirmed: req.body.orderConfirmed,
+			dateCreated: req.body.dateCreated,
+			dateUpdated: req.body.dateUpdated
 		});
 
 		newOrder.save(function(err) {
 			if (err) {
-				console.log(err);
+				res.status(500).send(err);
 			}
 
 			else {
-				console.log("Order have been created!");
+				res.status(200).send(newOrder);
 			}
 		});
 	});
@@ -38,10 +40,11 @@ module.exports = function(app) {
 		var id = req.params.id;
 
 		var updateOrderObj = {
-			subject: req.body.subject,
 			orderRef: req.body.orderRef,
 			order: req.body.order,
+			totalPrice: req.body.totalPrice,
 			orderConfirmed: req.body.orderConfirmed,
+			dateCreated: req.body.dateCreated,
 			dateUpdated: req.body.dateUpdated
 		};
 
