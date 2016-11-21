@@ -8,6 +8,7 @@
 		
 		$scope.editCommentMode = true;
 		$scope.singleBoard = {};
+		$scope.formatDate = [];
 
 		$scope.likeStatus = function(comment) {
 			var getCommentId = comment._id;
@@ -49,6 +50,9 @@
 		$scope.getSingleBoard = function() {
 			$http.get('/api/board/' + getId).then(function(res) {
 				$scope.singleBoard = res.data;
+
+				$scope.formatDate.push(moment($scope.singleBoard.comments.dateCreated).format('DD MMM, YYYY [at] h:mm:ss'));
+
 			});
 		};
 
