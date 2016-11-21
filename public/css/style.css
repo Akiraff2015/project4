@@ -35,6 +35,10 @@
 		font-size: 35px;
 	}
 
+	.padding-top-8px {
+		padding-top: 8px;
+	}
+
 	.noselect {
 		-webkit-touch-callout: none;
 		-webkit-user-select: none;

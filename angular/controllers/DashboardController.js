@@ -86,7 +86,7 @@
 
 			//HTTP POST /api/comment error callback
 			}, function errorCallback(res) {
-				console.log(res);
+				getBoardMessages();
 			});
 			$('#commentModal').modal('close');
 		};

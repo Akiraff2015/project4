@@ -42,8 +42,8 @@ block content
 								|{{board.title}}
 
 								span.right {{board.like}}
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-up.right
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
+								i.padding-top-8px(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-up.right
+								i.padding-top-8px(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
 
 					div.collapsible-body
 						p.truncate="{{board.description}}" 

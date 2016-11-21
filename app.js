@@ -48,7 +48,6 @@ require('./routes/render/render')(app);
 require('./routes/api/board')(app);
 require('./routes/api/ingredient')(app);
 require('./routes/api/item')(app);
-require('./routes/api/itemHistory')(app);
 require('./routes/api/supplier')(app);
 require('./routes/api/recipe')(app);
 require('./routes/api/comment')(app);
