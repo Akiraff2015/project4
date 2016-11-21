@@ -3,21 +3,6 @@ module.exports = function(app, passport) {
 		res.render('../angular/views/index', {});
 	});
 
-	// Render /items page
-	app.get('/items', function(req, res) {
-		res.render('../angular/views/item/show', {});
-	});
-
-	// Render /graph page
-	app.get('/graph', function(req, res) {
-		res.render('../angular/views/graph/show', {});
-	});
-
-	//Render /dashboard page
-	app.get('/dashboard', function(req, res) {
-		res.render('../angular/views/dashboard/show', {});
-	});
-
 	// GET register
 	app.get('/register', function(req, res) {
 		res.render('../angular/views/register', {});

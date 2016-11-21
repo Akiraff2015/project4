@@ -16,41 +16,47 @@ module.exports = function(app) {
 
 	//Method: POST --> Item
 	app.post('/api/item', function(req, res) {
-		var newItem;
+		var newItem = {
+
+		};
 
 		newItem = new Item({
 			title: req.body.title,
 			quantity: req.body.quantity,
-			description: req.body.description
+			description: req.body.description,
+			dateCreated: req.body.dateCreated,
+			$push: {"dateUpdated": new Date()}
 		});
 
 		newItem.save(function(err) {
-			if (err) {
-				console.log(err);
+			if (err) {twis
+				res.status(500).send(err)
 			}
 
 			else {
-				console.log("Item created!");
+				res.status(201).send(newItem);
 			}
 
-			res.status(201).send(newItem);
 		});
 	});
 
 	//Method: PUT --> Item:id
 	app.put('/api/item/:id', function(req, res) {
 		var id = req.params.id;
-		var updateItem;
 
 		var updateItemObj = {
+			$push: {
+				"quantity": req.body.quantity, 
+				"dateUpdated": new Date()
+			},
 			title: req.body.title,
-			quantity: req.body.quantity,
-			description: req.body.description
+			description: req.body.description,
+			dateCreated: req.body.dateCreated,
 		}
 
 		Item.findByIdAndUpdate({_id: id}, updateItemObj, function(err) {
 			if (err) {
-				res.status.send(err);
+				res.status(500).send(err);
 			}
 
 			else {

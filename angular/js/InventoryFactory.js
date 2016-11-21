@@ -8,8 +8,15 @@
 			});
 		};
 
+		var boardsData = function() {
+			return $http.get('/api/boards').then(function(res) {
+				return res.data;
+			});
+		}
+
 		return {
-			data: itemsData
+			itemsData: itemsData,
+			boardsData: boardsData
 		};
 	}]);
 })();

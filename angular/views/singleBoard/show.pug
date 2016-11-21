@@ -1,0 +1,49 @@
+extends ../layout/base
+
+block title
+	title="Single Board"
+
+block content
+	div.container(ng-controller="SingleBoardController")
+		h1 {{singleBoard.title}}
+		p {{singleBoard.description}}
+
+		h4
+			i.fa.fa-comment.margin-lr-6px
+			span Comments
+
+		div(ng-repeat="comment in singleBoard.comments").row
+			div.col.m8
+				div.card.green.z-depth-3
+					div.card-content.white-text
+						span.card-title
+						i.fa.fa-clock-o
+						span.margin-lr-6px {{formatDate[$index]}}
+
+							i.fa.fa-times.right.change-color-fa-times(ng-click="deleteComment(comment)")
+							i.fa.fa-pencil.right(ng-click="editCommentMode = !editCommentMode")
+						p(ng-show="editCommentMode") {{comment.comment}}
+						div(ng-hide="editCommentMode")
+							input#update_message.validate(type="text", ng-model="updateComment", placeholder="{{comment.comment}}")
+							a.btn(ng-click="editComment(comment, updateComment); editCommentMode = !editCommentMode") Update
+					div.card-action
+						a.modal-trigger(ng-click="initCommentModal()", href="#commentModal") Reply
+						i(ng-click="likeStatus(comment)", ng-hide="{{comment.likeBoolean}}").fa.fa-thumbs-up 
+							span.margin-lr-6px {{comment.like}}
+						i(ng-click="likeStatus(comment)", ng-show="{{comment.likeBoolean}}").fa.fa-thumbs-down 
+							span.margin-lr-6px {{comment.like}}
+
+						div#commentModal.modal
+							div.modal-content
+
+								span(ng-click="closeCommentModal()").right
+									i.fa.fa-times.change-color-fa-times
+								h2 Reply
+
+								div.row
+									div.input-field.col.s12
+										input#comment_message.validate(type="text", ng-model="comment.comment")
+										label(for="comment_message") Comment
+
+							div.modal-footer
+								a(ng-click="replyComment(comment); closeCommentModal()").btn.waves-effect.waves-red.z-depth-3.red.accent-4 Reply

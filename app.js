@@ -31,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+// TODO fix the static page, DONT import /bower_components!!!
 //Setting directory to the path
 app.use('/public', express.static(__dirname + '/public'));
 app.use('/bower_components', express.static(__dirname + '/bower_components'));
@@ -41,10 +42,17 @@ require('./angular/controllers/passport')(passport);
 
 //Routes directory
 require('./routes/routes')(app, passport);
+require('./routes/render/render')(app);
 
 // API
-require('./routes/api/item')(app);
 require('./routes/api/board')(app);
+require('./routes/api/ingredient')(app);
+require('./routes/api/item')(app);
+require('./routes/api/supplier')(app);
+require('./routes/api/recipe')(app);
+require('./routes/api/comment')(app);
+require('./routes/api/order')(app);
+
 
 app.listen(3000, function () {
 	console.log('http://localhost:3000/');

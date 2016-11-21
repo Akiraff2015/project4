@@ -1,0 +1,22 @@
+extends ../layout/base
+
+block content
+	div.container(ng-controller="SupplierController")
+		h1="Manage Suppliers"
+		div.row
+			div.input-field.col.s12
+				input#company_name.validate(type='text', ng-model="supplier.companyName")
+				label(for="company_name") Company's Name
+			div.input-field.col.s12
+				input#contact_name(type="text", ng-model="supplier.contactName")
+				label(for="contact_name") Cotanct's Name
+			div.input-field.col.s12
+				input#email(type="email" ng-model="supplier.email")
+				label(for="email") Email
+			div.input-field.col.s12
+				input#phone(type="text", ng-model="supplier.phone")
+				label(for="phone") Phone Number
+
+		div.col.s1.input-field.inline
+			a(ng-click="addNewSupplier(supplier)", onclick="Materialize.toast('Created new item!', 1500)").waves-effect-waves-light.btn.red.z-depth-2
+				|Create

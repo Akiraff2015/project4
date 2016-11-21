@@ -1,17 +1,29 @@
+
 doctype html
 html(ng-app="InventoryApp")
 	head
 		meta(charset="UTF-8")
 		block title
-			title="Project 4"
+			title="Managment System"
 		script(src="../../../bower_components/angular/angular.min.js")
 		script(src="../../../bower_components/angular-resource/angular-resource.js")
+		script(src="../../../bower_components/ng-tags-input/ng-tags-input.js")
 		script(src="../../../bower_components/jquery/dist/jquery.js")
 		script(src="../../../bower_components/materialize/bin/materialize.js")
 		script(src="../../../bower_components/chart.js/dist/Chart.js")
+		script(src="../../../bower_components/moment/moment.js")
+
+		//- Angular files
 		script(src="../../../angular/angularApp.js")
 		script(src="../../../angular/js/InventoryFactory.js")
 		script(src="../../../angular/controllers/InventoryController.js")
+		script(src="../../../angular/controllers/BoardMessageController.js")
+		script(src="../../../angular/controllers/SupplierController.js")
+		script(src="../../../angular/controllers/DashboardController.js")
+		script(src="../../../angular/controllers/RecipeController.js")
+		script(src="../../../angular/controllers/SingleBoardController.js")
+		script(src="../../../angular/controllers/OrderController.js")
+
 		script(src="../../../angular/js/graph.js")
 		script(src="../../../public/script/script.js")
 
@@ -19,40 +31,30 @@ html(ng-app="InventoryApp")
 		link(rel="stylesheet", type="text/css", href="../../../bower_components/font-awesome/css/font-awesome.min.css")
 		link(href='https://fonts.googleapis.com/css?family=Slabo+27px', rel='stylesheet')
 		link(rel="stylesheet", type="text/css", href="../../../public/css/style.css")
+		link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/ng-tags-input/ng-tags-input.css")
 
 	body
 		header
-			nav.green
-				ul.hide-on-med-and-down
-					li
-						a.btn.btn-collapse(href='#!') Show Dashboard
-					li
-						a(href='#!') Second Sidebar Link
-				ul#slide-out.side-nav.fixed
-					li.bold
-						a.waves-effect.waves-teal(href='#!') 
-							|Notice Board
-							span.badge 1337
-					li.bold
-						a.waves-effect.waves-teal(href='#!') Second Sidebar Link
-					li.no-padding
-						ul.collapsible.collapsible-accordion
-							li
-								a.collapsible-header.waves-effect.waves-teal
-									|Dashboard
-									i.mdi-navigation-arrow-drop-down
-								.collapsible-body
-									ul
-										li
-											a(href='/items') Manage Inventory
-										li
-											a(href='#!') Second
-										li
-											a(href='#!') Third
-										li
-											a(href='#!') Fourth
-					a.button-collapse(href='#', data-activates='slide-out')
-						|Show
 
+			nav.green
+				ul#dropdown1.dropdown-content
+					li
+						a(href="/recipe") Create New Recipe
+					li
+						a(href="/items") Create New Inventory
+					li
+						a(href="/board") Create New Announcement
+					li
+						a(href="/order") Create New Order
+				div.nav-rapper
+					ul.hide-on-med-and-down.right
+						li
+							a(href='/dashboard') Dashboard
+						//- li
+							a(href='/graph') Analytics
+						li.dropdown-button(data-activates="dropdown1")
+							a
+								|Managment Tool
 
 		block content

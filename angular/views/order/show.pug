@@ -1,0 +1,78 @@
+extends ../layout/base
+
+block content
+	div.container(ng-controller="OrderController")
+		h2 Order List
+
+		div.row
+			div.col.s2.offset-s2
+			a.btn.red.waves-effect.waves-dark(ng-click="initModal()", href="#createOrder")
+				|Create New Order
+
+		table
+			thead
+				th="Order Reference"
+				th="Total (HK$)"
+				th="Order Created"
+				th="Order Status"
+			tbody(ng-repeat="order in getOrders")
+				td
+					a(ng-click="initModal(order, $index)", href="#detailOrder")
+						|{{order.orderRef}}
+				td="{{order.totalPrice}}"
+				td="{{formatDate[$index]}}"
+				td
+					a(ng-click="updateOrderStatus(order)", ng-hide="{{order.orderConfirmed}}").btn.red.z-depth-3
+						|not delivered
+					a(ng-click="updateOrderStatus(order)", ng-show="{{order.orderConfirmed}}").btn.green.accent-3.z-depth-3.waves-effect.waves-dark
+						|devivered
+
+		//- Modal Form
+		div#createOrder.modal.modal-fixed-footer
+			div.modal-content
+				i(ng-click="closeModal()").fa.fa-times.right
+				h4 Create New Order
+
+				div.row
+					div.input-field.col.s9
+						input#order_reference.validate(type='text', ng-model="order.orderRef")
+						label(for="order_reference") Order Reference
+
+				div.row(ng-repeat="x in itemsForm")
+					div.input-field.col.s3
+						input#order_name.validate(type='text', ng-model='order.item[$index].name')
+						label(for="order_name") Name
+					div.input-field.col.s2
+						input#order_price(placeholder="19.99", type='number', ng-model='order.item[$index].price')
+					div.input-field.col.s2
+						input#order_quantity.validate(placeholder="quantity", type='number', ng-model="order.item[$index].quantity")
+					div.input-field.col.s2
+						input#order_unit(type='text', ng-model='order.item[$index].unit')
+						label(for="order_unit") Unit
+					div.input-field.col.s3
+						a(ng-show="itemsForm.length == 1").btn-floating.margin-lr-6px.z-depth-3.disabled
+							i.fa.fa-minus
+						a(ng-show="itemsForm.length != 1").btn-floating.margin-lr-6px.z-depth-3
+							i(ng-click="removeInputField($index)").fa.fa-minus
+						a.btn-floating.margin-lr-6px.z-depth-3
+							i(ng-click="createNewForm()").fa.fa-plus
+			div.modal-footer
+				a(ng-click="createOrder(order)").btn Submit
+
+		//- Modal Order Information
+		div#detailOrder.modal
+			div.modal-content
+				i(ng-click="closeModal()").fa.fa-times.right
+				h3 {{getSingleOrder.orderRef}}
+
+				table
+					thead
+						th="Name"
+						th="Price (HK$)"
+						th="Quantity"
+						th="Unit"
+					tbody(ng-repeat="item in getSingleOrder.order")
+						td="{{item.name}}"
+						td="{{item.price}}"
+						td="{{item.quantity}}"
+						td="{{item.unit}}"

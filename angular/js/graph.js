@@ -7,7 +7,7 @@
 			var itemArray = [];
 			var ctx = document.getElementById("stockItems").getContext("2d");
 
-			InventoryFactory.data().then(function(res) {
+			InventoryFactory.itemsData().then(function(res) {
 				res.forEach(function(element, index, array) {
 					itemArray.push(element.title);
 					quantityArray.push(element.quantity);

@@ -1,0 +1,28 @@
+extends ../layout/base
+
+block content
+	div.container(ng-controller="RecipeController")
+		h1="List of Recipes"
+
+		a(ng-hide="showForm", ng-click="showForm = !showForm").btn.waves-effect.waves-light.red Create New Recipe
+		div.row(ng-show="showForm")
+			h4="Create New Recipe"
+			div.input-field.col.s12
+				input#recipe_name.validate(type='text', ng-model="recipe.name")
+				label(for="recipe_name") Name
+			div.input-field.col.s12
+				input#recipe_category(type="text", ng-model="recipe.category")
+				label(for="recipe_category") Category
+			div.input.col.s12
+				textarea.materialize-textarea(placeholder="Write instructions here", ng-model="recipe.instruction")
+			div(ng-repeat="x in ingredientsForm").input-field
+				div.col.s10
+					input#recipe_ingredient(type="text", ng-model="ingredientsForm[$index].name", placeholder="Ingredient")
+				div.col.s1
+					a(ng-click="removeInputField($index)").btn-floating.red
+						i.fa.fa-minus
+				div(ng-show="$last").col.s1
+					a(ng-click="createNewInputField()").btn-floating.orange
+						i.fa.fa-plus
+
+			a(ng-click="createRecipe(recipe); showForm = !showForm").btn.waves-effect.waves-light.red Create New Recipe
