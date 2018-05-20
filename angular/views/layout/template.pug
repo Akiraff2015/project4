@@ -1,0 +1,27 @@
+doctype html
+html(ng-app="InventoryApp")
+	head
+		meta(charset="UTF-8")
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		
+		block title
+			title="Managment System"
+		script(src="../../../bower_components/angular/angular.min.js")
+		script(src="../../../bower_components/jquery/dist/jquery.js")
+		script(src="../../../bower_components/materialize/bin/materialize.js")
+
+
+
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/materialize/dist/css/materialize.css")
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/font-awesome/css/font-awesome.min.css")
+		link(href='https://fonts.googleapis.com/css?family=Slabo+27px', rel='stylesheet')
+		link(rel="stylesheet", type="text/css", href="../../../public/css/style.css")
+		link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+		link(rel="stylesheet", type="text/css", href="../../../bower_components/ng-tags-input/ng-tags-input.css")
+
+	body
+		header
+			nav.green
+				a.brand-logo(href="/") Inventory Managment System
+		
+		block content

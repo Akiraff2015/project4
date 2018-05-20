@@ -1,8 +1,9 @@
-
 doctype html
 html(ng-app="InventoryApp")
 	head
 		meta(charset="UTF-8")
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+
 		block title
 			title="Managment System"
 		script(src="../../../bower_components/angular/angular.min.js")
@@ -47,7 +48,7 @@ html(ng-app="InventoryApp")
 						a(href="/board") Create New Announcement
 					li
 						a(href="/order") Create New Order
-				div.nav-rapper
+				div.nav-wrapper
 					ul.hide-on-med-and-down.right
 						li
 							a(href='/dashboard') Dashboard
