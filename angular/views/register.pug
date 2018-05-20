@@ -2,13 +2,13 @@ extends layout/base
 
 block content
 	div.row
-		form(action="/register", method="post").col.s4.offset-s4.form-style.z-depth-3
+		form(action="/register", method="POST").col.s4.offset-s4.form-style.z-depth-3
 			h2.center-align.font-slabo.font-size-24px="Register New Account!"
 			div.row
-				input.validate(type="text", placeholder="Username")
+				input.validate(name="username", type="text", placeholder="Username")
 				label="Username"
 			div.row
-				input.validate(type="password", placeholder="Password")
+				input.validate(name="password" type="password", placeholder="Password")
 				label="Password"
 			div.row
 				input(type="submit" value="Register").waves-effect-waves-right.btn.col.s4.offset-s1.green.z-depth-2

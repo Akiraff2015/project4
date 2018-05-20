@@ -26,7 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 //Setup Sessions
-app.use(session({secret:'akira'}));
+app.use(session({
+	secret:'akira',
+	saveUninitialized: false,
+	resave: false
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -42,6 +46,7 @@ require('./angular/controllers/passport')(passport);
 
 //Routes directory
 require('./routes/routes')(app, passport);
+require('./routes/auth')(app, passport);
 require('./routes/render/render')(app);
 
 // API

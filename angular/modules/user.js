@@ -2,39 +2,20 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = mongoose.Schema({
-	local: {
-		username: String,
-		password: String,
-		role: 0
+	username: {
+		type: String,
+		required: true
+	},
+	password: {
+		type: String,
+		required: true
 	}
 });
 
-userSchema.pre('save', function(next) {
-	const user = this;
+// Hashing password
+userSchema.methods.hashPassword = password => bcrypt.hashSync(password, bcrypt.genSaltSync(10));
 
-	if (!user.isModified('local.password')) {
-		return next();
-	}
-	//Generate salt
-	bcrypt.genSalt(10, (erro, salt) => {
-		if (err) {
-			return next(err);
-		}
+// Comparing hash password with string password
+userSchema.methods.comparePassword = (password, hash) => bcrypt.compareSync(password, hash);
 
-		bcrypt.has(user.local.password, salt, null, (err, hash) => {
-			if (err) {
-				return next(err);
-			}
-			user.local.password = hash;
-			next();
-		});
-	});
-});
-
-userSchema.methods.validPassword = function(candidatePassword, cb) {
-	bcrypt.compare(candidatePassword, this.local.password, (err, isMatch) => {
-		cb(err, isMatch);
-	});
-};
-
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('users', userSchema, 'users');

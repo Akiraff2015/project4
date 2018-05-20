@@ -21,16 +21,4 @@ module.exports = function(app, passport) {
 		req.logout();
 		res.redirect('/');
 	});
-
-	app.post('/register', passport.authenticate('local-signup', {
-		successRedirect: '/success',
-		failureRedirect: '/fail',
-		failureFlash: true
-	}));
-
-	app.post('/login', passport.authenticate('local-login', {
-		successRedirect: '/success',
-		failureRedirect: '/fail',
-		failureFlash: true
-	}));
 }
