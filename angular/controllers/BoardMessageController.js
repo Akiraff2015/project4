@@ -10,7 +10,7 @@
 				method: 'POST',
 				url: '/api/board',
 				data: newBoard
-			}).then(function successCallback(res) {
+			}).then(function successCallback() {
 				$scope.board = {};
 			}, function errorCallback(res) {});
 		}

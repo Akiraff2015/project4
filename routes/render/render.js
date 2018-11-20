@@ -5,35 +5,25 @@ module.exports = function(app) {
 		} else {
 			res.redirect('/');
 		}
-	}
+	};
 	// Render /items page
-	app.get('/items', loggedIn, function(req, res) {
-		res.render('../angular/views/item/show', {});
-	});
+	app.get('/items', loggedIn, (req, res) => res.render('../angular/views/item/show', {}));
 
 	// Render /board page
-	app.get('/board', loggedIn, function(req, res) {
-		res.render('../angular/views/board/show', {});
-	});
+	app.get('/board', loggedIn, (req, res) => res.render('../angular/views/board/show', {}));
 
-	app.get('/board/:id', loggedIn, function(req, res) {
-		res.render('../angular/views/singleBoard/show', {});
-	});
+	// /board/:id
+	app.get('/board/:id', loggedIn, (req, res) => res.render('../angular/views/singleBoard/show', {}));
 
 	// Render /graph page
-	app.get('/graph', loggedIn, function(req, res) {
-		res.render('../angular/views/graph/show', {});
-	});
+	app.get('/graph', loggedIn, (req, res) => res.render('../angular/views/graph/show', {}));
 
-	//Render /dashboard page
-	app.get('/dashboard', loggedIn, function(req, res) {
-		res.render('../angular/views/dashboard/show', {});
-	});
+	// Render /dashboard page
+	app.get('/dashboard', loggedIn, (req, res) => res.render('../angular/views/dashboard/show', {}));
 
-	// Render /order page
-	app.get('/order', loggedIn, function(req, res) {
-		res.render('../angular/views/order/show', {});
-	});
+    // Render /order page
+	app.get('/order', loggedIn, (req, res) => res.render('../angular/views/order/show', {}));
+
 
 	//Render /recipe page
 	app.get('/recipe', loggedIn, function(req, res) {
@@ -50,8 +40,12 @@ module.exports = function(app) {
 		res.render('../angular/views/history/show', {});
 	});
 
-	//rennder /supplier page
+	//render /supplier page
 	app.get('/supplier', loggedIn, function(req, res) {
 		res.render('../angular/views/supplier/show', {});
+	});
+
+	app.get('/success', function(req, res) {
+		res.render('../angular/views/index');
 	});
 };

@@ -16,8 +16,11 @@ module.exports = function(app, passport) {
 					newUsername.save((err, user) => {
 						if (err) {
 							res.status(500).send('Database error');
+
+						// User successfully registered
 						} else {
-							res.send(user);
+							// res.send(user);
+							res.redirect('/success');
 						}
 					});
 				}

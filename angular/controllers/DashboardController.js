@@ -35,16 +35,16 @@
 		};
 
 		$scope.replyComment = function(comment) {
-			var getBoardId = getSingleBoard._id;
+			let getBoardId = getSingleBoard._id;
 			console.log(getBoardId);
 
-			var createCommentObj = {
+			let createCommentObj = {
 				comment: comment.comment,
 				like: 0,
 				likeBoolean: false,
 				dateCreated: new Date(),
 				dateUpdated: new Date()
-			}
+			};
 
 			// Creates a comment
 			$http({
@@ -56,9 +56,9 @@
 			}).then(function successCallback(res) {
 				// HTTP GET /api/newest-comment
 				$http.get('/api/newest-comment').then(function(res) {
-					var getData = res.data;
+					let getData = res.data;
 
-					var addCommentData = {
+					let addCommentData = {
 						title: getSingleBoard.title,
 						importance: getSingleBoard.importance,
 						description: getSingleBoard.description,

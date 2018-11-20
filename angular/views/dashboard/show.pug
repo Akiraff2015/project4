@@ -18,9 +18,10 @@ block content
 								label(for="{{board._id}}")
 								|{{board.title}}
 
-								span.right.padding-top-8px {{board.like}}
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-up.right
-								i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
+								// @TODO: Fix the mouse hover event ng-mouseenter
+								//span.right.padding-top-8px {{board.like}}
+								//i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-hide="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-up.right
+								//i(ng-mouseleave="removeClass()", ng-mouseenter="addClass()", ng-show="{{board.likeBoolean}}", ng-click="likeButton(board)").fa.fa-thumbs-down.right
 
 					div.collapsible-body
 						p.truncate="{{board.description}}" 

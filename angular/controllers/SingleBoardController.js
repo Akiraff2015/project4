@@ -8,14 +8,16 @@
 		
 		$scope.editCommentMode = true;
 		$scope.singleBoard = {};
-		$scope.formatDate = [];
+
+		//TODO: remove formatDate?
+		// $scope.formatDate = [];
 
 		$scope.likeStatus = function(comment) {
 			var getCommentId = comment._id;
-			var updateCommentBoolean = !comment.likeBoolean
+			var updateCommentBoolean = !comment.likeBoolean;
 
 			if (!comment.likeBoolean) {
-				var createCommentObj = {
+				let createCommentObj = {
 					comment: comment.comment,
 					like: comment.like + 1,
 					likeBoolean: updateCommentBoolean,
@@ -25,7 +27,7 @@
 			}
 
 			else {
-				var createCommentObj = {
+				let createCommentObj = {
 					comment: comment.comment,
 					like: comment.like -1,
 					likeBoolean: updateCommentBoolean,
@@ -47,15 +49,14 @@
 			});
 		};
 
-		$scope.getSingleBoard = function() {
+		$scope.getSingleBoard = () => {
 			$http.get('/api/board/' + getId).then(function(res) {
 				$scope.singleBoard = res.data;
-
-				$scope.formatDate.push(moment($scope.singleBoard.comments.dateCreated).format('DD MMM, YYYY [at] h:mm:ss'));
-
+				$scope.singleBoard.dateCreated = moment($scope.singleBoard.dateCreated).format('DD MMM, YYYY [at] h:mm:ss');
 			});
 		};
 
+		// Replying to new comments
 		$scope.replyComment = function(comment) {
 			var createCommentObj = {
 				comment: comment.comment,
@@ -65,10 +66,12 @@
 				dateUpdated: new Date()
 			};
 
+			// Getting API POST comment
 			$http({
 				method :'POST',
 				url: '/api/comment',
 				data: createCommentObj
+
 			// /api/comment POST success callback
 			}).then(function successCallback(res) {
 				$http.get('/api/newest-comment').then(function(res) {
@@ -84,10 +87,10 @@
 							comments: getData._id,
 							like: res.data.like,
 							likeBoolean: res.data.likeBoolean,
-							dateCreated: res.data.dataCreated,
-							dataUpdated: res.data.dataUpdated
+							dateCreated: moment(res.data.dateCreated).format('DD MMM [at] YYYY, h:mm:ss'),
+							dateUpdated: res.data.dateUpdated
 						};
-
+						//(moment($scope.singleBoard.comments.dateCreated).format('DD MMM, YYYY [at] h:mm:ss'));
 						$http({
 							method: 'PUT',
 							url: '/api/board/' + res.data._id,
